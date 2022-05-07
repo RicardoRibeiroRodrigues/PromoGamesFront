@@ -4,10 +4,12 @@ import { Tooltip, Card, CardMedia, Typography, IconButton, CardContent } from '@
 import axios from "axios";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from "react-router-dom";
 
 export default function Gamecard(props) {
   const { deal, store } = props;
   const [favorite, setFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const cardStyle = {
     width: 345,
@@ -20,10 +22,11 @@ export default function Gamecard(props) {
     },
   }
   const redirectDeal = async () => {
-    const dealLink = `https://www.cheapshark.com/api/1.0/deals?id=${deal.id}`;
-    // Aprender sobre react router!!
-    const detalhes = await axios.get(dealLink)
-      .then((res) => res.data);
+    const dealLink = `https://www.cheapshark.com/api/1.0/deals?id=${deal.dealID}`;
+    axios.get(dealLink)
+      .then((res) => {
+        navigate("/deal", { state: { details: res.data } });
+      });
   }
   // const metacriticScore = parseFloat(deal.metacriticScore) / 10;
   const saving = parseInt(deal.savings);

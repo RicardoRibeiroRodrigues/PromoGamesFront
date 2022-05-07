@@ -10,7 +10,7 @@ function App() {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1&storeID=1")
+    axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1")
       .then((res) => setDeals(res.data));
     axios.get("https://www.cheapshark.com/api/1.0/stores")
       .then((res) => setStores(res.data));
