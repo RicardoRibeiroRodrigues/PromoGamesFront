@@ -55,13 +55,6 @@ body {
   /* width: 100px; */
 }
 
-.float-left-full-height {
-  position: fixed;
-  height: 100vh;
-  width: 300px;
-  overflow: hidden;
-  left: 0;
-}
 
 .flex-column {
   display: flex;

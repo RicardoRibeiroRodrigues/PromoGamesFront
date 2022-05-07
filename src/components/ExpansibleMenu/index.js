@@ -25,8 +25,9 @@ export default function ExpansibleMenu(props) {
         {!menuState ? <ArrowRightIcon /> : <ArrowLeftIcon />}
       </IconButton>
       <Drawer
-        anchor={"left"}
+        anchor="right"
         open={menuState}
+        onOpen={() => toggleDrawer(true)}
         onClose={() => toggleDrawer(false)}
       >conteudo do drawer</Drawer>
     </Box>
