@@ -1,0 +1,26 @@
+.column-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.margin-top {
+    margin-top: 0.8rem;
+}
+
+.logo-right {
+    margin-left: 1rem;
+}
+
+.row-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.saving-title {
+    font-size: 2rem;
+    color: green;
+    font-weight: bold;
+}

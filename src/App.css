@@ -32,7 +32,38 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: #cfe8fc;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.static-full-height {
+  height: 100%;
+  /* width: 100px; */
+}
+
+.float-left-full-height {
+  position: fixed;
+  height: 100vh;
+  width: 300px;
+  overflow: hidden;
+  left: 0;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: row;
 }

@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import { useEffect, useState } from "react";
 import './App.css';
+import GameCard from './components/GameCard';
+import axios from 'axios';
+import SiteAppBar from "./components/SiteAppBar";
+import ExpansibleMenu from "./components/ExpansibleMenu";
 
 function App() {
+  const [deals, setDeals] = useState([]);
+  const [stores, setStores] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1")
+      .then((res) => setDeals(res.data));
+    axios.get("https://www.cheapshark.com/api/1.0/stores")
+      .then((res) => setStores(res.data));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SiteAppBar />
+      <div className="flex-column">
+        <ExpansibleMenu className="float-left-full-height" />
+        <div className='container'>
+          {deals.map((deal) => (
+            <GameCard key={`deal__${deal.dealID}`} deal={deal} store={stores[parseInt(deal.storeID) - 1]} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
