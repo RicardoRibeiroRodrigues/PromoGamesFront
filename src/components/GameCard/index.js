@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./index.css";
-import { Box, Typography, IconButton } from '@mui/material';
+import { Tooltip, Card, CardMedia, Typography, IconButton, CardContent } from '@mui/material';
 import axios from "axios";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
@@ -9,14 +9,10 @@ export default function Gamecard(props) {
   const { deal, store } = props;
   const [favorite, setFavorite] = useState(false);
 
-  const boxStyle = {
+  const cardStyle = {
+    width: 345,
     fontSize: "10px",
     margin: '1rem 1rem 0rem 1rem',
-    width: 300,
-    height: 300,
-    bgcolor: 'lightgrey',
-    border: '1px solid black',
-    borderRadius: '10px',
     '&:hover': {
       backgroundColor: 'grey',
       opacity: [0.9, 0.8, 0.7],
@@ -29,34 +25,35 @@ export default function Gamecard(props) {
     const detalhes = await axios.get(dealLink)
       .then((res) => res.data);
   }
-  const metacriticScore = parseFloat(deal.metacriticScore) / 10;
+  // const metacriticScore = parseFloat(deal.metacriticScore) / 10;
   const saving = parseInt(deal.savings);
 
   return (
-    <Box className="column-flex" sx={boxStyle} onClick={() => redirectDeal()}>
-      <div className="row-flex">
-        <h1>{props.deal.title}</h1>
-        <IconButton onClick={() => setFavorite(!favorite)}>
-          {favorite ? <StarIcon /> : <StarBorderIcon />}
-        </IconButton>
-      </div>
-      <img src={props.deal.thumb} alt='logo do jogo' width={100} />
-      {/* {props.deal.metacriticScore !== '0' ?
-        <div className='margin-top'>
-          <Typography component="legend" >
-            <Button variant="outlined" onClick={() => redirect(`https://www.metacritic.com/${deal.metacriticLink}`)}>
-              Meta critic score:
-            </Button>
-          </Typography>
-          <Rating name="customized-10" defaultValue={0} value={metacriticScore} max={10} precision={0.5} readOnly />
+    <Card className="column-flex" sx={{ maxWidth: 345, ...cardStyle }} onClick={() => redirectDeal()}>
+      <CardContent>
+        <div className="row-flex">
+          <Tooltip title={deal.title} placement="top-start">
+            <Typography variant="h4" sx={{
+              overflow: "hidden", whiteSpace: 'nowrap', textOverflow: "ellipsis", maxWidth: 300
+            }}>{deal.title}</Typography>
+          </Tooltip>
+          <IconButton onClick={() => setFavorite(!favorite)}>
+            {favorite ? <StarIcon /> : <StarBorderIcon />}
+          </IconButton>
         </div>
-        : <></>} */}
-      <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>
-
-      <div className='row-flex'>
-        <Typography>Loja da oferta: {store.storeName}</Typography>
-        <img className="logo-right" src={`https://www.cheapshark.com${store.images.logo}`} alt="logo da loja" width={50} />
-      </div>
-    </Box>
+      </CardContent>
+      <CardMedia
+        component="img"
+        image={deal.thumb}
+        alt="Logo do jogo"
+      />
+      <CardContent>
+        <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>
+        <div className='row-flex'>
+          <Typography>Loja da oferta: {store.storeName}</Typography>
+          <img className="logo-right" src={`https://www.cheapshark.com${store.images.logo}`} alt="logo da loja" width={50} />
+        </div>
+      </CardContent>
+    </Card >
   );
 }
