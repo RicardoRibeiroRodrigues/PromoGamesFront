@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./index.css";
-import { Tooltip, Card, CardMedia, Typography, IconButton, CardContent } from '@mui/material';
+import { Tooltip, Card, CardMedia, Typography, IconButton, CardContent, Button } from '@mui/material';
 import axios from "axios";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
@@ -15,11 +15,6 @@ export default function Gamecard(props) {
     width: 345,
     fontSize: "10px",
     margin: '1rem 1rem 0rem 1rem',
-    '&:hover': {
-      backgroundColor: 'grey',
-      opacity: [0.9, 0.8, 0.7],
-      cursor: 'pointer'
-    },
   }
   const redirectDeal = async () => {
     const dealLink = `https://www.cheapshark.com/api/1.0/deals?id=${deal.dealID}`;
@@ -31,8 +26,10 @@ export default function Gamecard(props) {
   // const metacriticScore = parseFloat(deal.metacriticScore) / 10;
   const saving = parseInt(deal.savings);
 
+
+
   return (
-    <Card className="column-flex" sx={{ maxWidth: 345, ...cardStyle }} onClick={() => redirectDeal()}>
+    <Card className="column-flex" sx={{ maxWidth: 345, ...cardStyle }} >
       <CardContent>
         <div className="row-flex">
           <Tooltip title={deal.title} placement="top-start">
@@ -50,12 +47,13 @@ export default function Gamecard(props) {
         image={deal.thumb}
         alt="Logo do jogo"
       />
-      <CardContent>
+      <CardContent sx={{ display: "flex", flexDirection: 'column', alignItems: "center" }}>
         <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>
         <div className='row-flex'>
           <Typography>Loja da oferta: {store.storeName}</Typography>
           <img className="logo-right" src={`https://www.cheapshark.com${store.images.logo}`} alt="logo da loja" width={50} />
         </div>
+        <Button onClick={() => redirectDeal()} variant="outlined">Ver mais detalhes</Button>
       </CardContent>
     </Card >
   );
