@@ -4,3 +4,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.modal-maior {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}

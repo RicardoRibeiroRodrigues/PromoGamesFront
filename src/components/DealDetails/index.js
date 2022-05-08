@@ -1,4 +1,4 @@
-import { Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography, Button } from "@mui/material";
 import React from "react";
 import { useLocation } from 'react-router-dom';
 import SiteAppBar from "../SiteAppBar";
@@ -10,8 +10,10 @@ export default function DealDetails(props) {
     // const details = props.location.state.details;
     const location = useLocation();
     const details = location.state.details;
+    const dealID = location.state.dealID;
     console.log(details);
     const { gameInfo, cheaperStores } = details;
+
     const flexCenter = {
         display: 'flex',
         alignItems: 'center',
@@ -43,6 +45,10 @@ export default function DealDetails(props) {
     if (gameInfo.steamRatingText)
         [color, reviewText] = formatSteamRating(gameInfo.steamRatingText);
 
+    const goToDeal = () => {
+        window.location.href = `https://www.cheapshark.com/redirect?dealID=${dealID}`;
+    }
+
     return (
         <>
             <SiteAppBar />
@@ -55,7 +61,8 @@ export default function DealDetails(props) {
                         </Typography>}
                     {/* Fazer essa parte !!! */}
                     {cheaperStores.map((store) => <Typography key={`Store: ${store.storeID}`}>{store.storeID}</Typography>)}
-                    <img src={gameInfo.thumb} ></img>
+                    <img src={gameInfo.thumb} alt='img thumb'></img>
+                    <Button sx={{ margin: '1rem 0rem 1rem 0rem' }} variant="outlined" onClick={() => goToDeal()}>Ir para oferta</Button>
                 </Paper>
             </Container>
         </>

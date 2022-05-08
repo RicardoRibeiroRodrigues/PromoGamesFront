@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import "./index.css";
-import { width } from "@mui/system";
 
 export default function ExpansibleMenu(props) {
   const [menuState, setMenuState] = useState(false);

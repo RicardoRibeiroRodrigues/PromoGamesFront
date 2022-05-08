@@ -13,7 +13,7 @@ export default function SiteAppBar(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar>
           <IconButton
             size="large"

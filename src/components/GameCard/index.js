@@ -13,7 +13,7 @@ export default function Gamecard(props) {
 
   const cardStyle = {
     width: 345,
-    height: 400,
+    height: 500,
     fontSize: "10px",
     margin: '1rem 1rem 0rem 1rem',
   }
@@ -21,7 +21,7 @@ export default function Gamecard(props) {
     const dealLink = `https://www.cheapshark.com/api/1.0/deals?id=${deal.dealID}`;
     axios.get(dealLink)
       .then((res) => {
-        navigate("/deal", { state: { details: res.data } });
+        navigate("/deal", { state: { details: res.data, dealID: deal.dealID } });
       });
   }
   // const metacriticScore = parseFloat(deal.metacriticScore) / 10;
@@ -46,17 +46,12 @@ export default function Gamecard(props) {
       <Tooltip title={<img className="max-height" src={deal.thumb} alt="Thumb completa"></img>} placement="left-start">
         <CardMedia
           component="img"
-          height={150}
+          height={250}
+          // sx={{ width: '50%' }}
           image={deal.thumb}
           alt="Logo do jogo"
         />
       </Tooltip>
-      {/* <CardMedia
-        component="img"
-        height={150}
-        image={deal.thumb}
-        alt="Logo do jogo"
-      /> */}
       <CardContent sx={{ display: "flex", flexDirection: 'column', alignItems: "center" }}>
         <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>
         <div className='row-flex'>
