@@ -49,6 +49,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   margin: 1rem 1rem 0rem 1rem;
+  margin-left: 6rem;
 }
 
 .static-full-height {

@@ -13,6 +13,7 @@ export default function Gamecard(props) {
 
   const cardStyle = {
     width: 345,
+    height: 400,
     fontSize: "10px",
     margin: '1rem 1rem 0rem 1rem',
   }
@@ -42,18 +43,27 @@ export default function Gamecard(props) {
           </IconButton>
         </div>
       </CardContent>
-      <CardMedia
+      <Tooltip title={<img className="max-height" src={deal.thumb} alt="Thumb completa"></img>} placement="left-start">
+        <CardMedia
+          component="img"
+          height={150}
+          image={deal.thumb}
+          alt="Logo do jogo"
+        />
+      </Tooltip>
+      {/* <CardMedia
         component="img"
+        height={150}
         image={deal.thumb}
         alt="Logo do jogo"
-      />
+      /> */}
       <CardContent sx={{ display: "flex", flexDirection: 'column', alignItems: "center" }}>
         <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>
         <div className='row-flex'>
-          <Typography>Loja da oferta: {store.storeName}</Typography>
+          <Typography>Loja da oferta: <span>{store.storeName}</span></Typography>
           <img className="logo-right" src={`https://www.cheapshark.com${store.images.logo}`} alt="logo da loja" width={50} />
         </div>
-        <Button onClick={() => redirectDeal()} variant="outlined">Ver mais detalhes</Button>
+        <Button sx={{ marginTop: '0.6rem' }} onClick={() => redirectDeal()} variant="outlined">Ver mais detalhes</Button>
       </CardContent>
     </Card >
   );
