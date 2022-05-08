@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import "./index.css";
+import { width } from "@mui/system";
 
 export default function ExpansibleMenu(props) {
   const [menuState, setMenuState] = useState(false);
@@ -25,7 +26,8 @@ export default function ExpansibleMenu(props) {
         open={menuState}
         onOpen={toggleDrawer(true)}
         onClose={toggleDrawer(false)}
-      >conteudo do drawer</Drawer>
-    </Box>
+        PaperProps={{ sx: { width: '18%' } }}
+      ><div width={1000}>conteudo do drawer</div></Drawer>
+    </Box >
   );
 }
