@@ -24,3 +24,8 @@
     color: green;
     font-weight: bold;
 }
+
+.max-height {
+    max-height: 80%;
+    max-width: 100%;
+}

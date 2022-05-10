@@ -8,28 +8,25 @@ export default function ExpansibleMenu(props) {
   const [menuState, setMenuState] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
     setMenuState(open);
-  };
+  }
 
   return (
     <Box className="center-child" sx={{ height: "100%", bgcolor: "lightgray" }}>
-      <IconButton onClick={() => toggleDrawer(true)}>
+      <IconButton onClick={toggleDrawer(true)}>
         {!menuState ? <ArrowRightIcon /> : <ArrowLeftIcon />}
       </IconButton>
       <Drawer
-        anchor="right"
+        anchor="left"
         open={menuState}
-        onOpen={() => toggleDrawer(true)}
-        onClose={() => toggleDrawer(false)}
-      >conteudo do drawer</Drawer>
-    </Box>
+        onOpen={toggleDrawer(true)}
+        onClose={toggleDrawer(false)}
+        PaperProps={{ sx: { width: '18%' } }}
+      ><div width={1000}>conteudo do drawer</div></Drawer>
+    </Box >
   );
 }
