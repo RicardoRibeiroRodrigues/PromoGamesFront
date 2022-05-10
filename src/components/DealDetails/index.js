@@ -62,6 +62,16 @@ export default function DealDetails(props) {
                     {/* Fazer essa parte !!! */}
                     {cheaperStores.map((store) => <Typography key={`Store: ${store.storeID}`}>{store.storeID}</Typography>)}
                     <img src={gameInfo.thumb} alt='img thumb'></img>
+                    {/* {props.deal.metacriticScore !== '0' ?
+            <div className='margin-top'>
+                        <Typography component="legend" >
+            <Button variant="outlined" onClick={() => redirect(`https://www.metacritic.com/${deal.metacriticLink}`)}>
+              Meta critic score:
+            </Button>
+          </Typography>
+          <Rating name="customized-10" defaultValue={0} value={metacriticScore} max={10} precision={0.5} readOnly />
+        </div>
+        : <></>} */}
                     <Button sx={{ margin: '1rem 0rem 1rem 0rem' }} variant="outlined" onClick={() => goToDeal()}>Ir para oferta</Button>
                 </Paper>
             </Container>

@@ -9,6 +9,7 @@ export default function SiteAppBar(props) {
 
   const sendToHome = () => {
     navigate("/");
+    window.location.reload();
   }
 
   return (

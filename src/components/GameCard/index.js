@@ -44,13 +44,22 @@ export default function Gamecard(props) {
         </div>
       </CardContent>
       <Tooltip title={<img className="max-height" src={deal.thumb} alt="Thumb completa"></img>} placement="left-start">
-        <CardMedia
-          component="img"
-          height={250}
-          // sx={{ width: '50%' }}
-          image={deal.thumb}
-          alt="Logo do jogo"
-        />
+        <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
+          <CardMedia
+            sx={{ position: 'absolute', objectFit: 'contain', zIndex: 1 }}
+            component="img"
+            height={250}
+            image={deal.thumb}
+            alt="Logo do jogo"
+          />
+          <CardMedia
+            component="img"
+            height={250}
+            sx={{ transform: 'scale(1.1)', filter: 'blur(2px) brightness(50%)' }}
+            image={deal.thumb}
+            alt="Logo do jogo"
+          />
+        </div>
       </Tooltip>
       <CardContent sx={{ display: "flex", flexDirection: 'column', alignItems: "center" }}>
         <Typography >Porcentagem de desconto: <span className="saving-title">{saving + '%'}</span></Typography>

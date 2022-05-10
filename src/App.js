@@ -8,19 +8,20 @@ import ExpansibleMenu from "./components/ExpansibleMenu";
 function App() {
   const [deals, setDeals] = useState([]);
   const [stores, setStores] = useState([]);
+  const [filters, setFilters] = useState("");
 
   useEffect(() => {
-    axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1")
+    axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1" + filters)
       .then((res) => setDeals(res.data));
     axios.get("https://www.cheapshark.com/api/1.0/stores")
       .then((res) => setStores(res.data));
-  }, []);
+  }, [filters]);
 
   return (
     <>
       <SiteAppBar />
       <div className="flex-column">
-        <ExpansibleMenu />
+        <ExpansibleMenu stores={stores} setFilters={setFilters} />
         <div className='container'>
           {deals.map((deal) => (
             <GameCard key={`deal__${deal.dealID}`} deal={deal} store={stores[parseInt(deal.storeID) - 1]} />
