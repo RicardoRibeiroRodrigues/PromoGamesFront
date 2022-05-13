@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Gamecard(props) {
   const { deal, store } = props;
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(props.favorite);
   const navigate = useNavigate();
 
   const cardStyle = {
@@ -27,18 +27,36 @@ export default function Gamecard(props) {
   // const metacriticScore = parseFloat(deal.metacriticScore) / 10;
   const saving = parseInt(deal.savings);
 
-
+  const handleFavorite = () => {
+    const body = {
+      "deal_id": deal.dealID,
+      "title": deal.title,
+      "saving": deal.savings,
+      "thumb": deal.thumb,
+      "store_id": deal.storeID
+    }
+    if (!favorite) {
+      axios
+        .post('http://127.0.0.1:8000/api/favorites', body)
+        .then((res) => console.log(res.data));
+    } else {
+      axios
+        .delete(`http://127.0.0.1:8000/api/favorites/${deal.dealID}`)
+        .then((res) => console.log(res.data));
+    }
+    setFavorite(!favorite);
+  };
 
   return (
     <Card className="column-flex" sx={{ maxWidth: 345, ...cardStyle }} >
       <CardContent>
         <div className="row-flex">
           <Tooltip title={deal.title} placement="top-start">
-            <Typography variant="h4" sx={{
+            <Typography variant="h6" sx={{
               overflow: "hidden", whiteSpace: 'nowrap', textOverflow: "ellipsis", maxWidth: 300
             }}>{deal.title}</Typography>
           </Tooltip>
-          <IconButton onClick={() => setFavorite(!favorite)}>
+          <IconButton onClick={() => handleFavorite()}>
             {favorite ? <StarIcon /> : <StarBorderIcon />}
           </IconButton>
         </div>

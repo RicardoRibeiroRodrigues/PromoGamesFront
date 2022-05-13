@@ -14,7 +14,8 @@ export default function FiltersList(props) {
 
   const storeInit = {};
   for (let store of props.stores) {
-    storeInit[store.storeID] = false;
+    if (store.isActive)
+      storeInit[store.storeID] = false;
   }
   const [storeList, setStoreList] = useState(storeInit);
 
@@ -28,7 +29,7 @@ export default function FiltersList(props) {
 
   const sendFilters = () => {
     let stringListStores = '';
-    Object.entries(storeList).map(item => {
+    Object.entries(storeList).forEach(item => {
       if (item[1] && stringListStores)
         stringListStores += `,${item[0]}`;
       if (item[1] && !stringListStores)
@@ -49,7 +50,7 @@ export default function FiltersList(props) {
     <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column' }}>
       <h2>Filtros</h2>
       <FormControl sx={{ width: '80%', alignSelf: 'center' }}>
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton sx={{ border: '1px solid grey' }} onClick={handleClick}>
           <ListItemText primaryTypographyProps={{ variant: 'h8', sx: { fontWeight: 'bold' } }} primary='Selecionar lojas a serem mostradas'></ListItemText>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
@@ -84,6 +85,6 @@ export default function FiltersList(props) {
       <Button sx={{ width: '50%', alignSelf: 'center', marginTop: '1rem' }} onClick={() => sendFilters()} variant='outlined'>
         Aplicar filtros/ordem
       </Button>
-    </div>
+    </div >
   );
 }

@@ -9,12 +9,25 @@ function App() {
   const [deals, setDeals] = useState([]);
   const [stores, setStores] = useState([]);
   const [filters, setFilters] = useState("");
+  const [favorites, setFavorites] = useState([]);
+
+  const isFavorite = (dealId) => {
+    for (let favorite of favorites) {
+      if (favorite['deal_id'] === dealId) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   useEffect(() => {
     axios.get("https://www.cheapshark.com/api/1.0/deals?AAA=1" + filters)
       .then((res) => setDeals(res.data));
     axios.get("https://www.cheapshark.com/api/1.0/stores")
       .then((res) => setStores(res.data));
+    axios
+      .get("http://127.0.0.1:8000/api/favorites")
+      .then((res) => setFavorites(res.data));
   }, [filters]);
 
   return (
@@ -24,7 +37,8 @@ function App() {
         <ExpansibleMenu stores={stores} setFilters={setFilters} />
         <div className='container'>
           {deals.map((deal) => (
-            <GameCard key={`deal__${deal.dealID}`} deal={deal} store={stores[parseInt(deal.storeID) - 1]} />
+            <GameCard key={`deal__${deal.dealID}`} favorite={() => isFavorite(deal.dealID)}
+              deal={deal} store={stores[parseInt(deal.storeID) - 1]} />
           ))}
         </div>
       </div>
