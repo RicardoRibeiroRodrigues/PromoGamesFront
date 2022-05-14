@@ -8,7 +8,7 @@ import FiltersList from "../FiltersList";
 export default function ExpansibleMenu(props) {
   const [menuState, setMenuState] = useState(false);
 
-  const boxStyle = { position: 'sticky', left: 0, top: 0, height: "100vh", bgcolor: "rgba(0,0,0,0.5)" };
+  const boxStyle = { position: 'sticky', left: 0, top: 0, height: "100vh", bgcolor: "rgba(0,0,0,0.3)" };
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -30,7 +30,8 @@ export default function ExpansibleMenu(props) {
         PaperProps={{ sx: { width: '30%' } }}
       >
         <div>
-          <FiltersList stores={props.stores} setFilters={props.setFilters} setMenuState={setMenuState} />
+          <FiltersList onlyFavorites={props.onlyFavorites} stores={props.stores}
+            setFilters={props.setFilters} setMenuState={setMenuState} />
         </div>
       </Drawer>
     </Box >

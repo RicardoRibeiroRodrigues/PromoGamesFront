@@ -10,6 +10,7 @@ function App() {
   const [stores, setStores] = useState([]);
   const [filters, setFilters] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [onlyFavorites, setOnlyFavorites] = useState(false);
 
   const isFavorite = (dealId) => {
     for (let favorite of favorites) {
@@ -34,12 +35,14 @@ function App() {
     <>
       <SiteAppBar />
       <div className="flex-column">
-        <ExpansibleMenu stores={stores} setFilters={setFilters} />
+        <ExpansibleMenu stores={stores} setFilters={setFilters}
+          onlyFavorites={{ 'state': onlyFavorites, 'setter': setOnlyFavorites }} />
         <div className='container'>
-          {deals.map((deal) => (
-            <GameCard key={`deal__${deal.dealID}`} favorite={() => isFavorite(deal.dealID)}
-              deal={deal} store={stores[parseInt(deal.storeID) - 1]} />
-          ))}
+          {!onlyFavorites ? deals.map((deal) => (
+            <GameCard key={`deal__${deal.dealID}`} id={deal.dealID} favorite={() => isFavorite(deal.dealID)}
+              deal={deal} store={stores[parseInt(deal.storeID) - 1]} setFavorites={setFavorites} />
+          )) : favorites.map((deal) => (<GameCard key={`deal__${deal['deal_id']}`} id={deal['deal_id']} favorite={true}
+            deal={deal} store={stores[parseInt(deal['store_id']) - 1]} setFavorites={setFavorites} />))}
         </div>
       </div>
     </>

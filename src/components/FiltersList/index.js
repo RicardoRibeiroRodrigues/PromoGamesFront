@@ -9,7 +9,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import "./index.css";
 
 export default function FiltersList(props) {
-  const [orderArg, setOrderArg] = useState('Deal Rating');
+  const [orderArg, setOrderArg] = useState('');
   const [open, setOpen] = useState(false);
 
   const storeInit = {};
@@ -18,6 +18,8 @@ export default function FiltersList(props) {
       storeInit[store.storeID] = false;
   }
   const [storeList, setStoreList] = useState(storeInit);
+
+  const onlyFavorites = props.onlyFavorites;
 
   const handleOrderChange = (event) => {
     setOrderArg(event.target.value);
@@ -36,7 +38,8 @@ export default function FiltersList(props) {
         stringListStores += `${item[0]}`;
     });
     let finalStringStores = stringListStores ? `&storeID=${stringListStores}` : '';
-    let finalString = `&sortBy=${orderArg}` + finalStringStores;
+    let finalOrderString = orderArg ? `&sortBy=${orderArg}` : '';
+    let finalString = finalOrderString + finalStringStores;
     props.setFilters(finalString);
     props.setMenuState(false);
   }
@@ -49,22 +52,34 @@ export default function FiltersList(props) {
   return (
     <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column' }}>
       <h2>Filtros</h2>
-      <FormControl sx={{ width: '80%', alignSelf: 'center' }}>
+      <FormControl key={'Lojas'} sx={{ width: '80%', alignSelf: 'center' }}>
         <ListItemButton sx={{ border: '1px solid grey' }} onClick={handleClick}>
-          <ListItemText primaryTypographyProps={{ variant: 'h8', sx: { fontWeight: 'bold' } }} primary='Selecionar lojas a serem mostradas'></ListItemText>
+          <ListItemText primaryTypographyProps={{ variant: 'h8', sx: { fontWeight: 'bold' } }}
+            primary='Selecionar lojas a serem mostradas'></ListItemText>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding sx={{ display: 'flex', flexDirection: 'column' }}>
             {props.stores.map((store) => (
-              <FormControlLabel
+              <FormControlLabel key={`store__${store.storeID}`}
                 control={
-                  <Checkbox id={store.storeID} checked={storeList[store.storeID]} onChange={handleStoreChange} name={store.storeName} />
+                  <Checkbox id={store.storeID} checked={storeList[store.storeID]}
+                    onChange={handleStoreChange} name={store.storeName} />
                 }
                 label={store.storeName}
               />))}
           </List>
         </Collapse>
+      </FormControl>
+      <FormControl key={'Favoritos'} sx={{ alignSelf: 'center', width: '80%', marginTop: '1rem' }}>
+        <FormControlLabel key={`Favoritos`}
+          control={
+            <Checkbox id={'favorito'}
+              checked={onlyFavorites.state}
+              onChange={() => onlyFavorites.setter(!onlyFavorites.state)} name={'Apenas favoritos.'} />
+          }
+          label={<span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Apenas favoritos</span>}
+        />
       </FormControl>
       <h2>Ordem</h2>
       <FormControl sx={{ width: '80%', alignSelf: 'center' }}>
