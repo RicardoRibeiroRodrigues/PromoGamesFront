@@ -10,7 +10,6 @@ export default function DealDetails(props) {
     const location = useLocation();
     const details = location.state.details;
     const dealID = location.state.dealID;
-    console.log(details);
     const { gameInfo, cheaperStores } = details;
 
     const flexCenter = {
@@ -45,17 +44,20 @@ export default function DealDetails(props) {
         [color, reviewText] = formatSteamRating(gameInfo.steamRatingText);
 
     const goToDeal = () => {
-        window.location.href = `https://www.cheapshark.com/redirect?dealID=${dealID}`;
+        window.open(`https://www.cheapshark.com/redirect?dealID=${dealID}`, '_blank');
     }
     const goToCritic = () => {
-        window.location.href = `https://www.metacritic.com/${gameInfo.metacriticLink}`;
+        window.open(`https://www.metacritic.com/${gameInfo.metacriticLink}`, '_blank');
     }
     const metacriticScoreValue = parseFloat(gameInfo.metacriticScore) / 10;
     return (
         <>
             <SiteAppBar />
             <Container sx={{ width: '100%', ...flexCenter }}>
-                <Paper sx={{ width: '80%', height: "50%", ...flexCenter, margin: "1rem 0rem 0rem 0rem", paddingBottom: '1rem' }}>
+                <Paper sx={{
+                    width: '80%', height: "50%", ...flexCenter,
+                    margin: "1rem 0rem 0rem 0rem", paddingBottom: '1rem'
+                }}>
                     <Typography variant='h3' sx={{ textAlign: 'center' }}>{details.gameInfo.name}</Typography>
                     {gameInfo.steamRatingText &&
                         <Typography variant="h5">

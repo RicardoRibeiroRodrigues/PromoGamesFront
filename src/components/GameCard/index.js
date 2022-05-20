@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import { Tooltip, Card, CardMedia, Typography, IconButton, CardContent, Button } from '@mui/material';
 import axios from "axios";
@@ -10,6 +10,10 @@ export default function Gamecard(props) {
   const { deal, store, id, setFavorites } = props;
   const [favorite, setFavorite] = useState(props.favorite);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setFavorite(props.favorite);
+  }, [props.favorite])
 
   const cardStyle = {
     width: 345,
@@ -36,11 +40,13 @@ export default function Gamecard(props) {
     }
     if (!favorite) {
       axios
-        .post('http://127.0.0.1:8000/api/favorites', body)
+        // .post('http://127.0.0.1:8000/api/favorites', body) // local
+        .post("https://afternoon-stream-42339.herokuapp.com/api/favorites", body)
         .then((res) => setFavorites(res.data));
     } else {
       axios
-        .delete(`http://127.0.0.1:8000/api/favorites`, { data: { 'deal_id': id } })
+        // .delete(`http://127.0.0.1:8000/api/favorites`, { data: { 'deal_id': id } }) // local
+        .delete("https://afternoon-stream-42339.herokuapp.com/api/favorites", { data: { 'deal_id': id } })
         .then((res) => setFavorites(res.data));
     }
     setFavorite(!favorite);

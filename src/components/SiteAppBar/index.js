@@ -1,34 +1,26 @@
 import React from "react";
 import "./index.css";
-import { Box, Toolbar, Typography, AppBar, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Box, Toolbar, Typography, AppBar } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import SearchBar from "../SearchBar";
 
 export default function SiteAppBar(props) {
   const navigate = useNavigate();
 
   const sendToHome = () => {
     navigate("/");
-    window.location.reload();
   }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <img src='PromoGames.png' alt="logo" height={50} className="margin-right-1 cursor-pointer" onClick={() => sendToHome()}></img>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <img src='PromoGames.png' alt="logo" height={50} className="margin-right-1 cursor-pointer"
+            onClick={() => sendToHome()}></img>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: '1rem' }}>
             Os melhores jogos em promoção.
           </Typography>
+          <SearchBar filters={props.filters} setFilters={props.setFilters}></SearchBar>
         </Toolbar>
       </AppBar>
     </Box>

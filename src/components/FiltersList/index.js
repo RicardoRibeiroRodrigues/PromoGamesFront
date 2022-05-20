@@ -97,7 +97,7 @@ export default function FiltersList(props) {
           <MenuItem value={'Metacritic'}>Nota na metacritic</MenuItem>
         </Select>
       </FormControl>
-      <Button sx={{ width: '50%', alignSelf: 'center', marginTop: '1rem' }} onClick={() => sendFilters()} variant='outlined'>
+      <Button sx={{ width: '50%', alignSelf: 'center', marginTop: '1rem', marginBottom: '1rem' }} onClick={() => sendFilters()} variant='outlined'>
         Aplicar filtros/ordem
       </Button>
     </div >
