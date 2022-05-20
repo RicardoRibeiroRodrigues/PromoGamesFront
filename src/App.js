@@ -68,8 +68,10 @@ function App() {
           {!onlyFavorites ? deals.map((deal) => (
             <GameCard key={`deal__${deal.dealID}`} id={deal.dealID} favorite={isFavorite(deal.dealID)}
               deal={deal} store={stores[parseInt(deal.storeID) - 1]} setFavorites={setFavorites} />
-          )) : favorites.map((deal) => (<GameCard key={`deal__${deal['deal_id']}`} id={deal['deal_id']} favorite={true}
-            deal={deal} store={stores[parseInt(deal['store_id']) - 1]} setFavorites={setFavorites} />))}
+          )) :
+            favorites.map((deal) => (<GameCard key={`deal__${deal['deal_id']}`} id={deal['deal_id']}
+              favorite={true}
+              deal={deal} store={stores[parseInt(deal['store_id']) - 1]} setFavorites={setFavorites} />))}
           <DelayMsg></DelayMsg>
         </div>
       </div>
