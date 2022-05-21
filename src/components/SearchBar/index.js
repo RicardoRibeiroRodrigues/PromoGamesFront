@@ -10,7 +10,6 @@ export default function SearchBar(props) {
 
 
   const handleChange = (event) => {
-    console.log(event);
     setContent(event.target.value);
   }
 

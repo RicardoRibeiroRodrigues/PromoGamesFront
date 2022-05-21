@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 
 export default function CheaperStores(props) {
     const { cheaperStores, stores } = props;
-    console.log(cheaperStores);
 
     const handleOtherOffer = (dealID) => {
         window.open(`https://www.cheapshark.com/redirect?dealID=${dealID}`, '_blank');

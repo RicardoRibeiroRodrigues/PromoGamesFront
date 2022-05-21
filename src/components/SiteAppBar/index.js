@@ -1,11 +1,12 @@
 import React from "react";
 import "./index.css";
 import { Box, Toolbar, Typography, AppBar } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar";
 
 export default function SiteAppBar(props) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const sendToHome = () => {
     navigate("/");
@@ -20,7 +21,8 @@ export default function SiteAppBar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: '1rem' }}>
             Os melhores jogos em promoção.
           </Typography>
-          <SearchBar filters={props.filters} setFilters={props.setFilters}></SearchBar>
+          {location.pathname === '/' &&
+            <SearchBar filters={props.filters} setFilters={props.setFilters}></SearchBar>}
         </Toolbar>
       </AppBar>
     </Box>
