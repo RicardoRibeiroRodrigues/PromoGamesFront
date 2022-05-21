@@ -1,17 +1,37 @@
 import React from 'react';
-
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 export default function CheaperStores(props) {
     const { cheaperStores, stores } = props;
+    console.log(cheaperStores);
 
-    return (
-        <div style={{ border: '1px solid black' }}>
-            <h7>Lojas mais baratas: </h7>
-            {
-                cheaperStores.map((deal) => (
-                    <span>A loja {deal.dealID} tem está vendendo esse jogo mais barato!</span>
-                ))
-            }
-        </div>
-    );
+    const handleOtherOffer = (dealID) => {
+        window.open(`https://www.cheapshark.com/redirect?dealID=${dealID}`, '_blank');
+    }
+
+    if (cheaperStores.length > 0) {
+        return (
+            <Paper sx={{ padding: '0.5rem', margin: '0.5rem', width: '70%' }} variant="elevation" >
+                <Typography variant='h6' >Lojas mais baratas: </Typography>
+                {
+                    cheaperStores.map((deal) => (
+                        <p>
+                            A loja
+                            <span key={`deal__${deal.dealID}`} style={{ color: 'green' }}>
+                                {" " + stores[parseInt(deal.storeID) - 1].storeName + " "}
+                            </span>
+                            está com vendendo esse jogo por: <span style={{ color: 'green' }}>
+                                {"$" + deal.salePrice}
+                            </span>
+                            <Button onClick={() => handleOtherOffer(deal.dealID)}>
+                                Conferir!
+                            </Button>
+                        </p>
+                    ))
+                }
+            </Paper>
+        );
+    }
 }

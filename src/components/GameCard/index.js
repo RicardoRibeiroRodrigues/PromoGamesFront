@@ -25,7 +25,7 @@ export default function Gamecard(props) {
     const dealLink = `https://www.cheapshark.com/api/1.0/deals?id=${id}`;
     axios.get(dealLink)
       .then((res) => {
-        navigate("/deal", { state: { details: res.data, dealID: id } });
+        navigate("/deal", { state: { details: res.data, dealID: id, stores: props.stores } });
       });
   }
   const saving = parseInt(deal.savings);
