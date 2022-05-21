@@ -7,7 +7,7 @@ O FrontEnd desse projeto consiste em 2 telas, uma para mostrar as ofertas, e ofe
 - [![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com)
 - [![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/pt/)
 ## Deploy:
-O link para o deploy no heroku está disponível [aqui](colocar-aqui-o-link-do-heroku).
+O link para o deploy no heroku está disponível [aqui](https://promo-games1.herokuapp.com/).
 ## Features principais:
 - [X] Listar jogos em promoção.
 - [X] Ser possível favoritar ofertas.
